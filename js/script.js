@@ -1,30 +1,4 @@
 "use strict";
-// const moreImg = document.querySelector('.more-img');
-// document.getElementById('toggleButton').addEventListener('click', function(event) {
-//   event.preventDefault();  // Предотвращаем переход по ссылке
-  
-//   // Находим все элементы с id="hidden"
-//   const hiddenItems = document.querySelectorAll('#hidden');
-  
-//   // Проверяем, скрыты ли элементы и меняем их состояние
-//   if (hiddenItems[0].style.display === 'none' || hiddenItems[0].style.display === '') {
-//     // Показываем скрытые элементы
-//     hiddenItems.forEach(item => {
-//       item.style.display = 'flex';
-//     });
-//     // Меняем текст кнопки на "Скрыть"
-//     document.getElementById('toggleButton').textContent = 'Скрыть';
-//     moreImg.style.transform = "rotate(180deg)"; 
-//   } else {
-//     // Скрываем элементы
-//     hiddenItems.forEach(item => {
-//       item.style.display = 'none';
-//     });
-//     // Меняем текст кнопки на "Показать все"
-//     document.getElementById('toggleButton').textContent = 'Показать все';
-//     moreImg.style.transform = "rotate(0deg)";
-//   }
-// });
 let swiper;
 function initSwiper() {
   if (window.innerWidth < 540) {
@@ -32,6 +6,7 @@ function initSwiper() {
       cssMode: true,
       pagination: {
         el: ".swiper-pagination",
+        clickable: true,
       },
       mousewheel: true,
       keyboard: true,
@@ -44,10 +19,44 @@ function destroySwiper() {
     swiper = null;
   }
 }
-// Инициализация Swiper при загрузке страницы
+
 initSwiper();
-// Обработка изменения размера окна
 window.addEventListener("resize", () => {
   initSwiper();
   destroySwiper();
 });
+const moreImg = document.querySelector('.more-img');
+document.getElementById('toggleButton').addEventListener('click', function(event) {
+  event.preventDefault();  
+  
+  const hiddenItems = document.querySelectorAll('#hidden');
+  if (hiddenItems[0].style.display === 'none' || hiddenItems[0].style.display === '') {
+    hiddenItems.forEach(item => {
+      item.style.display = 'flex';
+    });
+    document.getElementById('toggleButton').textContent = 'Скрыть';
+    moreImg.style.transform = "rotate(180deg)"; 
+  } else {
+    hiddenItems.forEach(item => {
+      item.style.display = 'none';
+    });
+    document.getElementById('toggleButton').textContent = 'Показать все';
+    moreImg.style.transform = "rotate(0deg)";  
+  }
+});
+
+function toggleMenuVisibility() {
+  const swiperMenu = document.querySelector('.mySwiper');
+  const menuMain = document.getElementById('menu-main');
+  const more = document.getElementById('more');
+
+  if (window.innerWidth < 540) {
+    swiperMenu.style.display = 'block';
+    menuMain.style.display = 'none';
+    more.style.display = 'none';
+  } else {
+    swiperMenu.style.display = 'none';
+    menuMain.style.display = 'flex';
+    more.style.display = 'flex';
+  }
+}
