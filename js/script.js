@@ -27,7 +27,7 @@
 // });
 let swiper;
 function initSwiper() {
-  if (window.innerWidth < 340) {
+  if (window.innerWidth < 540) {
     swiper = new Swiper(".mySwiper", {
       pagination: {
         el: ".swiper-pagination",
@@ -38,7 +38,7 @@ function initSwiper() {
   }
 }
 function destroySwiper() {
-  if (swiper && window.innerWidth >= 340) {
+  if (swiper && window.innerWidth >= 540) {
     swiper.destroy(true, true);
     swiper = null;
   }
