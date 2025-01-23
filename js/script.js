@@ -29,6 +29,7 @@ let swiper;
 function initSwiper() {
   if (window.innerWidth < 540) {
     swiper = new Swiper(".mySwiper", {
+      cssMode: true,
       pagination: {
         el: ".swiper-pagination",
       },
